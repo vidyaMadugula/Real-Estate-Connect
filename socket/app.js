@@ -2,7 +2,7 @@ import { Server } from "socket.io";
 
 const io = new Server({
   cors: {
-    origin: "https://real-estate-connect.vercel.app/",
+    origin: process.env.CLIENT_URL,
     // origin: "http://localhost:5173",
   },
 });

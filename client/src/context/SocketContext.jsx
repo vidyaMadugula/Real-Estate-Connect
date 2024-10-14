@@ -9,7 +9,7 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(io("https://real-estate-connect-socket.onrender.com"));
+    setSocket(io(process.env.SOCKET_URL));
   }, []);
 
   useEffect(() => {
