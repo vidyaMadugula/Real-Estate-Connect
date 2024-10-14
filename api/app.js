@@ -26,5 +26,5 @@ app.use("/api/chats",chatRoute);
 app.use("/api/messages",messageRoute);
 
 app.listen(8800,()=>{
-    console.log("server  running");
+    console.log("server  Running");
 });
