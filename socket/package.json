@@ -5,6 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
+    "start": "node socket/app.js",
     "dev": "nodemon socket/app.js"
   },
   "keywords": [],
