@@ -28,7 +28,6 @@
 // app.listen(8800,()=>{
 //     console.log("server  Running");
 // });
-
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -44,11 +43,13 @@ dotenv.config();
 
 const allowedOrigins = [
   'https://real-estate-connect.vercel.app',
-  'https://real-estate-connect-7lfzvpxdr-vidya-madugulas-projects.vercel.app'
+  'https://real-estate-connect-7lfzvpxdr-vidya-madugulas-projects.vercel.app',
+  'http://localhost:4000', // Add your local frontend URL here
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log("Origin:", origin); // Log the origin for debugging
     if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
@@ -61,6 +62,7 @@ const corsOptions = {
 const app = express();
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable pre-flight for all routes
 app.use(express.json());
 app.use(cookieParser());
 
