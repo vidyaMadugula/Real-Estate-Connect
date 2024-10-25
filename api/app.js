@@ -44,7 +44,7 @@ dotenv.config();
 const allowedOrigins = [
   'https://real-estate-connect.vercel.app',
   'https://real-estate-connect-7lfzvpxdr-vidya-madugulas-projects.vercel.app',
-  'http://localhost:4000', // Add your local frontend URL here
+  'http://localhost:5173/', // Add your local frontend URL here
 ];
 
 const corsOptions = {
