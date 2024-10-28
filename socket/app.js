@@ -55,6 +55,7 @@ const io = new Server({
   cors: {
     origin: process.env.VITE_CLIENT_URL, // Use the environment variable
     methods: ["GET", "POST"], // Add the allowed methods if needed
+    allowedHeaders: ["Authorization"],
     credentials: true 
   },
 });
