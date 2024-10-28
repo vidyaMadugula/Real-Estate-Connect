@@ -10,34 +10,6 @@ function Register() {
   const [error,setError]=useState("");
   const [isLoading,setIsLoading]=useState(false)
 
-  
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setError("");
-  //   setIsLoading(true);
-  //   const formData = new FormData(e.target);
-  
-  //   const username = formData.get("username");
-  //   const email = formData.get("email");
-  //   const password = formData.get("password");
-  
-  //   try {
-  //     const res = await apiRequest.post("/auth/register", {
-  //       username,
-  //       email,
-  //       password,
-  //     },{
-  //       withCredentials: true // Include credentials
-  //     });
-  
-  //     navigate("/login");
-  //   } catch (err) {
-  //     console.log(err);
-  //     setError(err.response ? err.response.data.message : "An unexpected error occurred");
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -49,7 +21,7 @@ function Register() {
     const password = formData.get("password");
   
     try {
-      const res = await apiRequest.post("/auth/register", {
+      const res = await apiRequest.post("/api/auth/register", {
         username,
         email,
         password,
@@ -122,3 +94,32 @@ export default Register;
   //     setIsLoading(false)
   //   }
   // }
+  
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setIsLoading(true);
+  //   const formData = new FormData(e.target);
+  
+  //   const username = formData.get("username");
+  //   const email = formData.get("email");
+  //   const password = formData.get("password");
+  
+  //   try {
+  //     const res = await apiRequest.post("/auth/register", {
+  //       username,
+  //       email,
+  //       password,
+  //     },{
+  //       withCredentials: true // Include credentials
+  //     });
+  
+  //     navigate("/login");
+  //   } catch (err) {
+  //     console.log(err);
+  //     setError(err.response ? err.response.data.message : "An unexpected error occurred");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
