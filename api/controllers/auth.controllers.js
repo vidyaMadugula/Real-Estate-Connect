@@ -80,7 +80,7 @@ export const login=async (req,res)=>{
     );
     
     const {password: userPassword,...userInfo}=user;
-    localStorage.setItem("token", token);
+    // localStorage.setItem("token", token);
     res
     .cookie("token",token,{
         httpOnly:true,
@@ -90,7 +90,7 @@ export const login=async (req,res)=>{
     .status(200)
     // .json(userInfo)
     .json({token,...userInfo});
-    // console.log("token",token);
+    
 
     }catch(err){
         console.log(err);
