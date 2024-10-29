@@ -80,6 +80,7 @@ export const login=async (req,res)=>{
     );
     
     const {password: userPassword,...userInfo}=user;
+    localStorage.setItem("token", token);
     res
     .cookie("token",token,{
         httpOnly:true,
