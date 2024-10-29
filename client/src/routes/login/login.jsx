@@ -26,6 +26,7 @@ function Login() {
         username,
         password,
       });
+      localStorage.setItem("token", res.data.token);
 
       updateUser(res.data)
 

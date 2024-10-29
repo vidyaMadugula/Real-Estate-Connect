@@ -16,6 +16,7 @@ function ProfilePage() {
   const handleLogout = async () => {
     try {
       await apiRequest.post("/api/auth/logout");
+      localStorage.removeItem("token");
       updateUser(null);
       navigate("/");
     } catch (err) {
