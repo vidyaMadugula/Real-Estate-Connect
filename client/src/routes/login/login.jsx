@@ -54,6 +54,7 @@ function Login() {
             type="password"
             required
             placeholder="Password"
+            autocomplete="current-password"
           />
           <button disabled={isLoading}>Login</button>
           {error && <span>{error}</span>}
