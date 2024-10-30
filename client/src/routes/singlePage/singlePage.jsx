@@ -17,10 +17,10 @@ function SinglePage() {
     if (!currentUser) {
       navigate("/login");
     }
-    // AFTER REACT 19 UPDATE TO USEOPTIMISTIC HOOK
+    // AFTER REACT 19 UPDATE TO USEOPTIMISTIK HOOK
     setSaved((prev) => !prev);
     try {
-      await apiRequest.post("/api/users/save", { postId: post.id });
+      await apiRequest.post("/users/save", { postId: post.id });
     } catch (err) {
       console.log(err);
       setSaved((prev) => !prev);
@@ -43,7 +43,7 @@ function SinglePage() {
                 <div className="price">$ {post.price}</div>
               </div>
               <div className="user">
-                <img src={post.user.avatar || "/noavatar.jpg"} alt="photo" />
+                <img src={post.user.avatar} alt="" />
                 <span>{post.user.username}</span>
               </div>
             </div>

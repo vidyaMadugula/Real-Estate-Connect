@@ -1,59 +1,55 @@
+import { useState } from "react";
 import "./newPostPage.scss";
-import { useState ,useEffect} from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { useNavigate } from "react-router-dom";
 
-
-
 function NewPostPage() {
+  const [value, setValue] = useState("");
+  const [images, setImages] = useState([]);
+  const [error, setError] = useState("");
 
-  const [value,setValue]=useState("");
-  const [images,setImages]=useState([]);
-  const [error,setError]=useState("");
+  const navigate = useNavigate()
 
-  const navigate=useNavigate()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const inputs = Object.fromEntries(formData);
 
-  const handleSubmit= async e =>{
-    console.log("In handleSubmit");
-    e.preventDefault()
-    const formData=new FormData(e.target);
-    const inputs=Object.fromEntries(formData);
-
-    try{
-      const res= await apiRequest.post("/api/posts",{
-        postData:{
-          title:inputs.title,
-          price:parseInt(inputs.price),
-          address:inputs.address,
-          city:inputs.city,
-          bedroom:parseInt(inputs.bedroom),
-          bathroom:parseInt(inputs.bathroom),
-          type:inputs.type,
-          property:inputs.property,
-          latitude:inputs.latitude,
-          longitude:inputs.longitude,
-          images:images,
+    try {
+      const res = await apiRequest.post("/posts", {
+        postData: {
+          title: inputs.title,
+          price: parseInt(inputs.price),
+          address: inputs.address,
+          city: inputs.city,
+          bedroom: parseInt(inputs.bedroom),
+          bathroom: parseInt(inputs.bathroom),
+          type: inputs.type,
+          property: inputs.property,
+          latitude: inputs.latitude,
+          longitude: inputs.longitude,
+          images: images,
         },
-        postDetail:{
-          desc:value,
-          utilities:inputs.utilities,
-          pet:inputs.pet,
-          income:inputs.income,
-          size:parseInt(inputs.size),
-          school:parseInt(inputs.school),
-          bus:parseInt(inputs.bus),
-          restaurant:parseInt(inputs.restaurant),
-        }
+        postDetail: {
+          desc: value,
+          utilities: inputs.utilities,
+          pet: inputs.pet,
+          income: inputs.income,
+          size: parseInt(inputs.size),
+          school: parseInt(inputs.school),
+          bus: parseInt(inputs.bus),
+          restaurant: parseInt(inputs.restaurant),
+        },
       });
-      navigate("/",res.data.id);
-    }catch(err){
-      // console.log(err)
-      setError(err.message || 'Error occurred')
+      navigate("/"+res.data.id)
+    } catch (err) {
+      console.log(err);
+      setError(error);
     }
-  }
+  };
 
   return (
     <div className="newPostPage">
@@ -75,7 +71,7 @@ function NewPostPage() {
             </div>
             <div className="item description">
               <label htmlFor="desc">Description</label>
-              <ReactQuill theme="snow" onChange={setValue} value={value}/> 
+              <ReactQuill theme="snow" onChange={setValue} value={value} />
             </div>
             <div className="item">
               <label htmlFor="city">City</label>
@@ -115,6 +111,7 @@ function NewPostPage() {
                 <option value="land">Land</option>
               </select>
             </div>
+
             <div className="item">
               <label htmlFor="utilities">Utilities Policy</label>
               <select name="utilities">
@@ -141,19 +138,19 @@ function NewPostPage() {
             </div>
             <div className="item">
               <label htmlFor="size">Total Size (sqft)</label>
-              <input min={1} id="size" name="size" type="number" />
+              <input min={0} id="size" name="size" type="number" />
             </div>
             <div className="item">
               <label htmlFor="school">School</label>
-              <input min={1} id="school" name="school" type="number" />
+              <input min={0} id="school" name="school" type="number" />
             </div>
             <div className="item">
               <label htmlFor="bus">bus</label>
-              <input min={1} id="bus" name="bus" type="number" />
+              <input min={0} id="bus" name="bus" type="number" />
             </div>
             <div className="item">
               <label htmlFor="restaurant">Restaurant</label>
-              <input min={1} id="restaurant" name="restaurant" type="number" />
+              <input min={0} id="restaurant" name="restaurant" type="number" />
             </div>
             <button className="sendButton">Add</button>
             {error && <span>error</span>}
@@ -161,16 +158,17 @@ function NewPostPage() {
         </div>
       </div>
       <div className="sideContainer">
-        {images.map((image,index)=>(
+        {images.map((image, index) => (
           <img src={image} key={index} alt="" />
         ))}
-        <UploadWidget uwConfig={{
-          multiple:true,
-          cloudName:"dgy2fxzcs",
-          uploadPreset:"estate",
-          folder:"posts",
-        }}
-        setState={setImages}
+        <UploadWidget
+          uwConfig={{
+            multiple: true,
+            cloudName: "lamadev",
+            uploadPreset: "estate",
+            folder: "posts",
+          }}
+          setState={setImages}
         />
       </div>
     </div>
@@ -178,4 +176,3 @@ function NewPostPage() {
 }
 
 export default NewPostPage;
-
