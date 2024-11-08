@@ -70,7 +70,7 @@ export const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Set to true if using HTTPS
+        secure: true, // Set to true if using HTTPS
         sameSite: "None", // Required for cross-origin cookies
         maxAge: age,
       })
