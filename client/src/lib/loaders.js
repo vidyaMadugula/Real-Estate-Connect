@@ -25,12 +25,12 @@ import { defer } from "react-router-dom";
 import apiRequest from "./apiRequest";
 
 export const singlePageLoader = async ({ request, params }) => {
-  const res = await apiRequest("/posts/" + params.id);
+  const res = await apiRequest("/posts/" + params.id, { withCredentials: true });
   return res.data;
 };
 export const listPageLoader = async ({ request, params }) => {
   const query = request.url.split("?")[1];
-  const postPromise = apiRequest("/posts?" + query);
+  const postPromise = apiRequest("/posts?" + query, { withCredentials: true });
   return defer({
     postResponse: postPromise,
   });
@@ -39,7 +39,7 @@ export const listPageLoader = async ({ request, params }) => {
 export const profilePageLoader = async () => {
   // const postPromise = apiRequest("/users/profilePosts");
   const postPromise = apiRequest("/users/profilePosts", { withCredentials: true });
-  const chatPromise = apiRequest("/chats");
+  const chatPromise = apiRequest("/chats", { withCredentials: true });
   return defer({
     postResponse: postPromise,
     chatResponse: chatPromise,
