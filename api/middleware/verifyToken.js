@@ -1,5 +1,6 @@
 
 export const verifyToken = (req, res, next) => {
+  console.log("Hello");
   const token = req.cookies.token;
   console.log("Token received:", token);
 
