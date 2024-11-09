@@ -25,14 +25,7 @@ function Login() {
         password,
       });
 
-      // Assuming the response contains the token and user data
-      const token = res.data.token;
-
-      // Save the token to localStorage
-      if (token) {
-        localStorage.setItem("token", token);
-        console.log("Token saved to localStorage:", token);
-      }
+      
 
       // Update user context
       updateUser(res.data.user);
