@@ -25,10 +25,8 @@ function Login() {
         password,
       });
 
-      
-
       // Update user context
-      updateUser(res.data.user);
+      updateUser(res.data);
 
       // Redirect to home page or any authenticated page
       navigate("/");
