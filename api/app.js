@@ -11,10 +11,14 @@ import messageRoute from "./routes/message.route.js";
 const app = express();
 
 // Enhanced CORS configuration
-app.use(cors({
-  origin: process.env.VITE_CLIENT_URL,
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: 'https://real-estate-connect-client.onrender.com', // Your frontend URL
+    credentials: true, // Allow credentials (cookies)
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Explicitly allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers if needed
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
