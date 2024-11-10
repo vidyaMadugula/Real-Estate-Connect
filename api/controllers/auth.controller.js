@@ -1,5 +1,3 @@
-
-
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
@@ -70,8 +68,7 @@ export const login = async (req, res) => {
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: true, // Set to true if using HTTPS
-        sameSite: "None", // Required for cross-origin cookies
+        secure:true,
         maxAge: age,
       })
       .status(200)
