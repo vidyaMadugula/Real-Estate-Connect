@@ -10,6 +10,7 @@ function SearchBar() {
     location: "",
     minPrice: 0,
     maxPrice: 0,
+    bedroom: 0,
   });
 
   const switchType = (val) => {
@@ -48,11 +49,19 @@ function SearchBar() {
           type="number"
           name="maxPrice"
           min={0}
-          max={10000000}
+          max={10000000000000}
           placeholder="Max Price"
           onChange={handleChange}
         />
-        <Link to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}>
+        <input
+            type="number"
+            name="bedroom"
+            placeholder="Bedroom Number"
+            min={0}
+            max={100}
+            onChange={handleChange}
+          />
+        <Link to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}&bedroom=${query.bedroom}`}>
         <button>
           <img src="/search.png" alt="" />
         </button>
