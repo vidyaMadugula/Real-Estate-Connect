@@ -1,4 +1,4 @@
-import { useState ,useContext} from "react";
+import { useState ,useContext,useEffect} from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -16,6 +16,13 @@ function Navbar() {
     fetch();
   }
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [open]);
   return (
     <nav>
       <div className="left">
@@ -70,4 +77,6 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
 
