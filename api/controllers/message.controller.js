@@ -15,7 +15,7 @@ export const addMessage=async(req,res)=>{
             },
         });
 
-        if(!chat) return res.status(404).json({message:"Chat not found"})
+        if(!chat) return res.status(404).json({status: 404,message:"Chat not found"})
 
         const message=await prisma.message.create({
              data:{
@@ -38,7 +38,7 @@ export const addMessage=async(req,res)=>{
         res.status(200).json(message)
     }catch(err){
         console.log(err)
-        res.status(500).json({message:"Failed to add mesage!"})
+        res.status(500).json({status: 500,message:"Failed to add mesage!"})
     }
 }
 

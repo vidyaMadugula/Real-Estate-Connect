@@ -43,7 +43,7 @@
     input {
       border: none;
       padding: 0px 10px;
-      width: 200px;
+      width: 160px;
 
       @include lg {
         padding: 0px 5px;
@@ -83,6 +83,7 @@
         border: none;
         cursor: pointer;
         background-color: #fece51;
+        width:65px;
         
         @include sm{
           padding: 10px;

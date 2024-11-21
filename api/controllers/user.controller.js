@@ -7,7 +7,7 @@ export const getUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get users!" });
+    res.status(500).json({status: 500, message: "Failed to get users!" });
   }
 };
 
@@ -20,7 +20,7 @@ export const getUser = async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get user!" });
+    res.status(500).json({status: 500, message: "Failed to get user!" });
   }
 };
 
@@ -30,7 +30,7 @@ export const updateUser = async (req, res) => {
   const { password, avatar, ...inputs } = req.body;
 
   if (id !== tokenUserId) {
-    return res.status(403).json({ message: "Not Authorized!" });
+    return res.status(403).json({status: 403, message: "Not Authorized!" });
   }
 
   let updatedPassword = null;
@@ -53,7 +53,7 @@ export const updateUser = async (req, res) => {
     res.status(200).json(rest);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to update users!" });
+    res.status(500).json({status: 500, message: "Failed to update users!" });
   }
 };
 
@@ -62,7 +62,7 @@ export const deleteUser = async (req, res) => {
   const tokenUserId = req.userId;
 
   if (id !== tokenUserId) {
-    return res.status(403).json({ message: "Not Authorized!" });
+    return res.status(403).json({status: 403, message: "Not Authorized!" });
   }
 
   try {
@@ -72,7 +72,7 @@ export const deleteUser = async (req, res) => {
     res.status(200).json({ message: "User deleted" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to delete users!" });
+    res.status(500).json({status: 500, message: "Failed to delete users!" });
   }
 };
 
@@ -138,7 +138,7 @@ export const savePost = async (req, res) => {
             },
           },
         });
-        res.status(200).json({ message: "Post removed from saved list" });
+        res.status(200).json({status: 200, message: "Post removed from saved list" });
       } else {
         // Otherwise, save the post
         await prisma.savedPost.create({
@@ -151,7 +151,7 @@ export const savePost = async (req, res) => {
       }
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: "Failed to save or remove post" });
+      res.status(500).json({status: 500, message: "Failed to save or remove post" });
     }
   };
 
@@ -174,7 +174,7 @@ export const profilePosts = async (req, res) => {
     res.status(200).json({ userPosts, savedPosts });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get profile posts!" });
+    res.status(500).json({status: 500, message: "Failed to get profile posts!" });
   }
 };
 
@@ -196,6 +196,6 @@ export const getNotificationNumber = async (req, res) => {
     res.status(200).json(number);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get profile posts!" });
+    res.status(500).json({status: 500, message: "Failed to get profile posts!" });
   }
 };

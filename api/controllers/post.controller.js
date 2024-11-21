@@ -23,7 +23,7 @@ export const getPosts = async (req, res) => {
     // }, 3000);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get posts" });
+    res.status(500).json({status: 500, message: "Failed to get posts" });
   }
 };
 
@@ -68,7 +68,7 @@ export const getPost = async (req, res) => {
       }
     } catch (err) {
       console.log(err);
-      res.status(500).json({ message: "Failed to get post" });
+      res.status(500).json({status: 500, message: "Failed to get post" });
     }
   };
   
@@ -90,7 +90,7 @@ export const addPost = async (req, res) => {
     res.status(200).json(newPost);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to create post" });
+    res.status(500).json({status: 500, message: "Failed to create post" });
   }
 };
 
@@ -99,7 +99,7 @@ export const updatePost = async (req, res) => {
     res.status(200).json();
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to update posts" });
+    res.status(500).json({status: 500, message: "Failed to update posts" });
   }
 };
 
@@ -113,7 +113,7 @@ export const deletePost = async (req, res) => {
     });
 
     if (post.userId !== tokenUserId) {
-      return res.status(403).json({ message: "Not Authorized!" });
+      return res.status(403).json({status: 403, message: "Not Authorized!" });
     }
 
     await prisma.post.delete({
@@ -123,6 +123,6 @@ export const deletePost = async (req, res) => {
     res.status(200).json({ message: "Post deleted" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to delete post" });
+    res.status(500).json({status: 500, message: "Failed to delete post" });
   }
 };

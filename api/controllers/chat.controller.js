@@ -4,7 +4,7 @@ export const getChats = async (req, res) => {
   const tokenUserId = req.userId;
   // console.log("userId",tokenUserId);
   if (!tokenUserId) {
-    return res.status(401).json({ message: "User ID is not defined" });
+    return res.status(401).json({status: 401, message: "User ID is not defined" });
 }
 
   try {
@@ -35,7 +35,7 @@ export const getChats = async (req, res) => {
     res.status(200).json(chats);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get chats!" });
+    res.status(500).json({status: 500, message: "Failed to get chats!" });
   }
 };
 
@@ -88,7 +88,7 @@ export const getChat = async (req, res) => {
     res.status(200).json(chat);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get chat!" });
+    res.status(500).json({status: 500, message: "Failed to get chat!" });
   }
 };
 
@@ -103,7 +103,7 @@ export const addChat = async (req, res) => {
     res.status(200).json(newChat);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to add chat!" });
+    res.status(500).json({status: 500, message: "Failed to add chat!" });
   }
 };
 
@@ -128,6 +128,6 @@ export const readChat = async (req, res) => {
     res.status(200).json(chat);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to read chat!" });
+    res.status(500).json({status: 500, message: "Failed to read chat!" });
   }
 };
