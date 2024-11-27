@@ -25,7 +25,7 @@ function List({ posts }) {
           <Card key={item.id} item={item} />
         ))
       ) : (
-        <p>No posts available.</p>
+        <p>No properties are available.</p>
       )}
     </div>
   );
