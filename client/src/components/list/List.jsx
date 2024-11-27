@@ -17,6 +17,7 @@ import './list.scss';
 import Card from "../card/Card";
 
 function List({ posts }) {
+  console.log("No posts available");
   return (
     <div className='list'>
       {posts && posts.length > 0 ? (
