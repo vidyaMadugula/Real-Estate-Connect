@@ -69,7 +69,7 @@ function ListPage() {
                     <Card key={post.id} item={post} />
                   ))
                 ) : (
-                  <p>No posts are available.</p>
+                  <p>No properties are available for above filter.</p>
                 )
               }
             </Await>
