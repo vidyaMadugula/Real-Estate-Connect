@@ -81,12 +81,8 @@ export const login = async (req, res) => {
       })
       .status(200)
       .json(userInfo);
-<<<<<<< HEAD
       
     logger.info(`${username} logged in successfully`);
-=======
-    console.log("tOKEN",token);
->>>>>>> ea9f9d8ddb55ce1142f6519c603d17e33fd578bb
   } catch (err) {
     logger.error(`Login failed for username: ${username} - Error: ${err.message}`);
     res.status(500).json({status: 500, message: "Failed to login!" });
