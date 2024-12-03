@@ -8,6 +8,9 @@ import userRoute from "./routes/user.route.js";
 import chatRoute from "./routes/chat.route.js";
 import messageRoute from "./routes/message.route.js";
 
+import logger from "./logger.js";
+import morgan from "morgan";
+
 const app = express();
 
 // Enhanced CORS configuration
@@ -22,6 +25,24 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+const morganFormat = ":method :url :status :response-time ms";
+
+
+app.use(
+  morgan(morganFormat, {
+    stream: {
+      write: (message) => {
+        const logObject = {
+          method: message.split(" ")[0],
+          url: message.split(" ")[1],
+          status: message.split(" ")[2],
+          responseTime: message.split(" ")[3],
+        };
+        logger.info(JSON.stringify(logObject));
+      },
+    },
+  })
+);
 
 
 // Route definitions
@@ -48,6 +69,9 @@ app.listen(8800, () => {
 // import userRoute from "./routes/user.route.js";
 // import chatRoute from "./routes/chat.route.js";
 // import messageRoute from "./routes/message.route.js";
+
+// import logger from "./logger.js";
+// import morgan from "morgan";
 
 // const app = express();
 
@@ -79,6 +103,24 @@ app.listen(8800, () => {
 
 // app.use(express.json());
 // app.use(cookieParser());
+// const morganFormat = ":method :url :status :response-time ms";
+
+
+// app.use(
+//   morgan(morganFormat, {
+//     stream: {
+//       write: (message) => {
+//         const logObject = {
+//           method: message.split(" ")[0],
+//           url: message.split(" ")[1],
+//           status: message.split(" ")[2],
+//           responseTime: message.split(" ")[3],
+//         };
+//         logger.info(JSON.stringify(logObject));
+//       },
+//     },
+//   })
+// );
 
 // // Route definitions
 // app.use("/api/auth", authRoute);
@@ -93,3 +135,6 @@ app.listen(8800, () => {
 // app.listen(PORT, () => {
 //   console.log(`Server is running on port ${PORT}`);
 // });
+
+
+

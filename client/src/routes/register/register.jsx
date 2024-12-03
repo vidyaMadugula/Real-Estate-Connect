@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./register.scss";
 import apiRequest from "../../lib/apiRequest";
 
+
 function Register() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,7 @@ function Register() {
         email,
         password,
       });
+      // logger.info(`User registered with username: ${username}, email: ${email}`);
 
       navigate("/login");
     } catch (err) {

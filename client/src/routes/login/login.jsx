@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
 
+
 function Login() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,7 @@ function Login() {
         username,
         password,
       });
+     
 
       updateUser(res.data)
 

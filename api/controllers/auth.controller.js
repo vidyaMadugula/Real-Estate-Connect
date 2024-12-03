@@ -1,9 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
+import logger from "../logger.js";
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
+
 
   try {
     // HASH THE PASSWORD
@@ -22,10 +24,12 @@ export const register = async (req, res) => {
     });
 
     console.log(newUser);
-
+    
     res.status(201).json({status: 201, message: "User created successfully" });
+    logger.info(`${username} registered  successfully`);
+    
+    
   } catch (err) {
-    console.log(err);
     res.status(500).json({status: 500, message: "Failed to create user!" });
   }
 };
@@ -40,13 +44,16 @@ export const login = async (req, res) => {
       where: { username },
     });
 
-    if (!user) return res.status(400).json({status: 400, message: "Invalid Credentials!" });
+    if (!user) 
+    // logger.info(`Login failed for username: ${username} - User not found`);
+      return res.status(400).json({status: 400, message: "Invalid Credentials!" });
 
     // CHECK IF THE PASSWORD IS CORRECT
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid)
+    // logger.info(`Login failed for username: ${username} - Invalid password`);
       return res.status(400).json({status: 400, message: "Invalid Credentials!" });
 
     // GENERATE COOKIE TOKEN AND SEND TO THE USER
@@ -74,8 +81,10 @@ export const login = async (req, res) => {
       })
       .status(200)
       .json(userInfo);
+      
+    logger.info(`${username} logged in successfully`);
   } catch (err) {
-    console.log(err);
+    logger.error(`Login failed for username: ${username} - Error: ${err.message}`);
     res.status(500).json({status: 500, message: "Failed to login!" });
   }
 };
