@@ -65,10 +65,10 @@ function ProfilePage() {
           </div>
           <Suspense fallback={<p>Loading...</p>}>
             <Await
-              resolve={data.postResponse}
-              errorElement={<p>Error loading posts!</p>}
+            resolve={data.postResponse}
+            errorElement={<p>Error loading posts!</p>}
             >
-              {(postResponse) => <List posts={postResponse.data.savedPosts} />}
+             {(postResponse) => (<List posts={postResponse.data.savedPosts.map(post => ({ ...post, isSaved: true }))} />)}
             </Await>
           </Suspense>
         </div>

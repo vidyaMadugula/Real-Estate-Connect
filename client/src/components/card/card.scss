@@ -80,24 +80,44 @@
         }
       }
 
-      .icons {
-        display: flex;
-        gap: 20px;
+      // .icons {
+      //   display: flex;
+      //   gap: 20px;
 
-        .icon {
-          border: 1px solid #999;
-          padding: 2px 5px;
-          border-radius: 5px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+      //   .icon {
+      //     border: 1px solid #999;
+      //     padding: 2px 5px;
+      //     border-radius: 5px;
+      //     cursor: pointer;
+      //     display: flex;
+      //     align-items: center;
+      //     justify-content: center;
 
-          &:hover {
-            background-color: lightgray;
-          }
-        }
-      }
+      //     &:hover {
+      //       background-color: lightgray;
+      //     }
+      //   }
+      // }
+    }
+  }
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap:20px;
+
+  button {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #fece51;
+    border-radius: 5px;
+    cursor: pointer;
+
+    img {
+      width: 16px;
+      height: 16px;
     }
   }
 }
