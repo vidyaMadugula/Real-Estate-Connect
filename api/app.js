@@ -16,11 +16,11 @@ const app = express();
 // Enhanced CORS configuration
 app.use(
   cors({
-  //  origin: 'https://real-estate-connect-client.onrender.com', // Your frontend URL
-   origin:[
-  'http://localhost:5173',
-  'https://real-estate-connect-client.onrender.com'
-  ],
+   origin: 'https://real-estate-connect-client.onrender.com', // Your frontend URL
+  //  origin:[
+  // 'http://localhost:5173',
+  // 'https://real-estate-connect-client.onrender.com'
+  // ],
     credentials: true, // Allow credentials (cookies)
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Explicitly allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers if needed
