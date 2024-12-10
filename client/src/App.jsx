@@ -8,7 +8,8 @@ import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
-import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import { listPageLoader, profilePageLoader, singlePageLoader,homePageLoader } from "./lib/loaders";
+// import PostsPage from "./routes/postsPage/postsPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,7 @@ function App() {
         {
           path: "/",
           element: <HomePage />,
+          loader: homePageLoader,
         },
         {
           path: "/list",
@@ -45,6 +47,10 @@ function App() {
       path: "/",
       element: <RequireAuth />,
       children: [
+        // {
+        //   path: "/postsPage",
+        //   element:<PostsPage />,
+        // },
         {
           path: "/profile",
           element: <ProfilePage />,

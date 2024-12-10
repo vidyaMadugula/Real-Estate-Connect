@@ -84,3 +84,17 @@
     }
   }
 }
+.myListContainer {
+  display: flex;
+  flex-direction: column; // Ensure heading is above posts
+  padding: 20px;
+  gap: 20px; // Adds spacing between the heading and posts
+}
+
+.myListHeading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align:left; // Optional: Center align the heading
+}
+
