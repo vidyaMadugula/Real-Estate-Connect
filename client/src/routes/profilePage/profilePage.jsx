@@ -47,7 +47,7 @@ function ProfilePage() {
             <button onClick={handleLogout}>Logout</button>
           </div>
           <div className="title">
-            <h1>My List</h1>
+            <h1>My Posts</h1>
             <Link to="/add">
               <button>Create New Post</button>
             </Link>
@@ -61,7 +61,7 @@ function ProfilePage() {
             </Await>
           </Suspense>
           <div className="title">
-            <h1>Saved List</h1>
+            <h1>Saved Posts</h1>
           </div>
           <Suspense fallback={<p>Loading...</p>}>
             <Await
@@ -80,7 +80,14 @@ function ProfilePage() {
               resolve={data.chatResponse}
               errorElement={<p>Error loading chats!</p>}
             >
-              {(chatResponse) => <Chat chats={chatResponse.data}/>}
+              {/* {(chatResponse) => <Chat chats={chatResponse.data}/>} */}
+              {(chatResponse) =>
+                chatResponse?.data?.length > 0 ? (
+                  <Chat chats={chatResponse.data} />
+                ) : (
+                  <p>No messages yet! .</p>
+                )
+              }
             </Await>
           </Suspense>
         </div>
@@ -90,3 +97,4 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+

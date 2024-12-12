@@ -1,9 +1,12 @@
+
+
 import { Link } from "react-router-dom";
 import "./card.scss";
-import { useNavigate, useLoaderData } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
+
 function Card({ item }) {
   const [saved, setSaved] = useState(item.isSaved); // Initialize from the parent data
   const { currentUser } = useContext(AuthContext);
@@ -66,6 +69,5 @@ function Card({ item }) {
     </div>
   );
 }
-
 
 export default Card;
