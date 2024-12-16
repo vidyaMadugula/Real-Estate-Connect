@@ -29,7 +29,7 @@ function Card({ item }) {
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
-        <img src={item.images[0]} alt="" />
+        <img className="image" src={item.images[0]} alt="" />
       </Link>
       <div className="textContainer">
         <h2 className="title">

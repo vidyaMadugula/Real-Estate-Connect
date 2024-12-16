@@ -2,14 +2,18 @@
 
 .card {
   display: flex;
+  flex-direction: row;
   gap: 20px;
+  @include md{
+    flex-direction: column;
+  }
 
   .imageContainer {
-    flex: 2;
-    height: 200px;
+    flex: 3;
+    height: 250px;
 
     @include md {
-      display: none;
+      display: block;
     }
 
     img {
@@ -20,7 +24,7 @@
     }
   }
   .textContainer {
-    flex: 3;
+    flex: 2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

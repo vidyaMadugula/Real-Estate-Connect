@@ -24,7 +24,7 @@ export const profilePageLoader = async () => {
 };
 export const homePageLoader = async ({ request }) => {
   // Check if the user is logged in and fetch their posts
-  const postPromise = apiRequest("/users/profilePosts");
+  const postPromise = apiRequest("/posts");
   return defer({
     postResponse: postPromise,
   });

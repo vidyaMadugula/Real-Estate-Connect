@@ -119,11 +119,13 @@ function Navbar() {
       <div className="right">
         {currentUser ? (
           <div className="user">
+            <Link to="/profile">
             <img src={currentUser.avatar || "/noavatar.jpg"} alt="User" />
+            </Link>
             <span>{currentUser.username || 'User'}</span>
             <Link to="/profile" className="profileButton">
               {number > 0 && <div className="notification">{number}</div>}
-              <span>Profile</span>
+              <span>chat</span>
             </Link>
           </div>
         ) : (

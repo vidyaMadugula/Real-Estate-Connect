@@ -26,9 +26,8 @@ export const register = async (req, res) => {
     console.log(newUser);
     
     res.status(201).json({status: 201, message: "User created successfully" });
-    logger.info(`${username} registered  successfully`);
-    
-    
+    logger.info(`${username} registered in successfully`);
+
   } catch (err) {
     res.status(500).json({status: 500, message: "Failed to create user!" });
   }
@@ -91,4 +90,5 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   res.clearCookie("token").status(200).json({status: 200, message: "Logout Successful" });
+  logger.info(`${username} logout successfully`);
 };
