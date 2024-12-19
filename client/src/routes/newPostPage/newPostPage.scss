@@ -27,9 +27,10 @@
           display: flex;
           flex-direction: column;
           gap: 5px;
-
-          label {
+          @include md{
+            width: 45%;
           }
+
 
           input {
             padding: 20px;
@@ -44,6 +45,9 @@
           &.description {
             width: 100%;
             height: 320px;
+            @include md{
+              margin-bottom: 24px;
+            }
 
             .quill > .ql-container > .ql-editor{
               height: 200px;

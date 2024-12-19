@@ -143,11 +143,11 @@ function Navbar() {
         </div>
         <div className={open ? 'menu active' : 'menu'}>
           <a href="/">Home</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
+          {/* <a href="/">About</a> */}
           {!isProfilePage && currentUser && (
             <Link to="/profile">Profile</Link>
           )}
+          <a href="/profile">Chat</a>
           {!currentUser && (
             <>
               <a href="/login">Sign in</a>

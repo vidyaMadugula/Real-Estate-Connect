@@ -105,17 +105,6 @@ function HomePage() {
               }
             </Await>
           </Suspense>
-          <div className="title">
-          <h1>Saved Posts</h1>
-          </div>
-          <Suspense fallback={<p>Loading...</p>}>
-            <Await
-            resolve={data.postResponse}
-            errorElement={<p>Error loading posts!</p>}
-            >
-             {(postResponse) => (<List posts={postResponse.data.savedPosts.map(post => ({ ...post, isSaved: true }))} />)}
-            </Await>
-          </Suspense>
         </div>
       )}
 

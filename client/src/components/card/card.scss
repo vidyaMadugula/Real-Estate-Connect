@@ -82,6 +82,16 @@
           padding: 5px;
           border-radius: 5px;
         }
+        img{
+          @include md{
+            width:10px;
+          }
+        }
+        span{
+          @include md{
+            font-size: 12px;
+          }
+        }
       }
 
       // .icons {
