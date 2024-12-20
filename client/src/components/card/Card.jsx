@@ -1,16 +1,36 @@
 
-
 import { Link } from "react-router-dom";
 import "./card.scss";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 
 function Card({ item }) {
-  const [saved, setSaved] = useState(item.isSaved); // Initialize from the parent data
+  const [saved, setSaved] = useState(() => {
+    // Check if the post is saved in localStorage on page load
+    const savedPosts = JSON.parse(localStorage.getItem("savedPosts")) || [];
+    return savedPosts.includes(item.id);
+  });
+
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Sync saved state to localStorage
+    const savedPosts = JSON.parse(localStorage.getItem("savedPosts")) || [];
+    if (saved) {
+      // If saved, add post ID to savedPosts
+      if (!savedPosts.includes(item.id)) {
+        savedPosts.push(item.id);
+        localStorage.setItem("savedPosts", JSON.stringify(savedPosts));
+      }
+    } else {
+      // If unsaved, remove post ID from savedPosts
+      const updatedSavedPosts = savedPosts.filter((id) => id !== item.id);
+      localStorage.setItem("savedPosts", JSON.stringify(updatedSavedPosts));
+    }
+  }, [saved, item.id]);
 
   const handleSave = async () => {
     if (!currentUser) {
@@ -58,7 +78,7 @@ function Card({ item }) {
             <button
               onClick={handleSave}
               style={{
-                backgroundColor: saved ? "#fece51" : "white",
+                backgroundColor: saved ? "#fece51" : "white", // Change save button background
               }}
             >
               <img src="/save.png" alt="" />
