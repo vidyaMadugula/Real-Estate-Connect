@@ -8,7 +8,7 @@ export const shouldBeLoggedIn=async(req,res)=>{
 export const shouldBeAdmin=async(req,res)=>{
     const token=req.cookies.token;
 
-    if (!token) return res.status(401).json({status: 401,message:"Not Authenticated!"});
+    if (!token) return res.status(401).json({status: 401,message:"Nottt Authenticated!"});
 
     jwt.verify(token,process.env.JWT_SECRET_KEY,async(err,payload)=>{
         if(err) return res.status(403).json({status: 403,message:"Token is not valid!"})
