@@ -1,0 +1,22 @@
+@import "../../responsive.scss";
+.chatPage {
+    flex: 2;
+    background-color: #fcf5f3;
+    height: 100%;
+    padding: 20px;
+
+    @include md{
+      flex:none;
+      height: max-content;
+    }
+
+    .wrapper{
+      padding: 0px 20px;
+      height: 100%;
+    }
+    h1{
+        margin-bottom: 20px;
+        padding-top: 20px;
+    }
+  }
+

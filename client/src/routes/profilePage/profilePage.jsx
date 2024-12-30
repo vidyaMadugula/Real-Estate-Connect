@@ -90,8 +90,8 @@ function ProfilePage() {
               }
             </Await>
           </Suspense>
-        </div>
-      </div>  */}
+        </div> 
+      </div> */}
     </div>
   );
 }

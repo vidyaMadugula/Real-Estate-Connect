@@ -72,9 +72,11 @@ function Card({ item }) {
             </div>
           </div>
           <div className="buttons">
+            <Link to="/chatPage">
             <button>
               <img src="/chat.png" alt="" />
             </button>
+            </Link>
             <button
               onClick={handleSave}
               style={{

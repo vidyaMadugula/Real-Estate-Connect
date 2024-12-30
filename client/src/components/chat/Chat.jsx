@@ -76,7 +76,7 @@ function Chat({ chats }) {
   return (
     <div className="chat">
       <div className="messages">
-        <h1>Messages</h1>
+        {/* <h1>Messages</h1> */}
         {chats?.map((c) => (
           <div
             className="message"

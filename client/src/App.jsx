@@ -8,7 +8,8 @@ import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
-import { listPageLoader, profilePageLoader, singlePageLoader,homePageLoader } from "./lib/loaders";
+import ChatPage from "./routes/ChatPage/chatPage";
+import { listPageLoader, profilePageLoader, singlePageLoader,homePageLoader, chatPageLoader } from "./lib/loaders";
 // import PostsPage from "./routes/postsPage/postsPage";
 
 function App() {
@@ -63,6 +64,11 @@ function App() {
         {
           path: "/add",
           element: <NewPostPage />,
+        },
+        {
+          path: "/chatPage",
+          element: <ChatPage />,
+          loader:chatPageLoader
         },
       ],
     },
