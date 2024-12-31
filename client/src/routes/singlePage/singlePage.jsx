@@ -2,7 +2,7 @@ import "./singlePage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import DOMPurify from "dompurify";
-import { useNavigate, useLoaderData } from "react-router-dom";
+import { useNavigate, useLoaderData,Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
@@ -139,10 +139,12 @@ function SinglePage() {
             <Map items={[post]} />
           </div>
           <div className="buttons">
+            <Link to="/chatPage">
             <button>
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
+            </Link>
             <button
               onClick={handleSave}
               style={{

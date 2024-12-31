@@ -1,5 +1,4 @@
 
-import Chat from "../../components/chat/Chat";
 import List from "../../components/list/List";
 import "./profilePage.scss";
 import apiRequest from "../../lib/apiRequest";
@@ -73,25 +72,7 @@ function ProfilePage() {
           </Suspense>
         </div>
       </div>
-      {/* <div className="chatContainer">
-      <div className="wrapper">
-          <Suspense fallback={<p>Loading...</p>}>
-            <Await
-              resolve={data.chatResponse}
-              errorElement={<p>Error loading chats!</p>}
-            >
-              
-              {(chatResponse) =>
-                chatResponse?.data?.length > 0 ? (
-                  <Chat chats={chatResponse.data} />
-                ) : (
-                  <p>No messages yet! .</p>
-                )
-              }
-            </Await>
-          </Suspense>
-        </div> 
-      </div> */}
+     
     </div>
   );
 }

@@ -40,6 +40,9 @@ function HomePage() {
 
                 return allPostsWithSaveStatus.length > 0 ? (
                   <List posts={allPostsWithSaveStatus} />
+    
+                  // <List posts={allPostsWithSaveStatus} showActions={false} />
+
                 ) : (
                   <p>No posts available. Start creating the first post!</p>
                 );

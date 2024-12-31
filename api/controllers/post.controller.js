@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 
 export const getPosts = async (req, res) => {
   const query = req.query;
-
   try {
     const posts = await prisma.post.findMany({
       where: {
@@ -17,7 +16,6 @@ export const getPosts = async (req, res) => {
         },
       },
     });
-
     // setTimeout(() => {
     res.status(200).json(posts);
     // }, 3000);
