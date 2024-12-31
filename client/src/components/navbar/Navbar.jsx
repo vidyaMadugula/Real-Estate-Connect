@@ -242,7 +242,7 @@ function Navbar() {
         <div className={open ? 'menu active' : 'menu'}>
           {!isHomePage && <a href="/">Home</a>}
           {!isProfilePage && currentUser && <Link to="/profile">Profile</Link>}
-          {!isChatPage && <a href="/chatPage">Chat</a>}
+          {!isChatPage && !isHomePage &&<a href="/chatPage">Chat</a>}
           {!currentUser && (
             <>
               <a href="/login">Sign in</a>
