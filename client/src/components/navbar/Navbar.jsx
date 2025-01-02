@@ -200,15 +200,15 @@ function Navbar() {
     <nav>
       <div className="left">
         {/* Conditionally render "Home" link beside the logo for Desktop view */}
-        <a href="/" className="logo">
+        <a  className="logo">
           <img src="/logo.png" alt="Logo" />
           <span>RealEstate</span>
         </a>
-        {!isHomePage && (
+        
           <a href="/" className="homeLink">
             Home
           </a>
-        )}
+      
       </div>
       <div className="right">
         {currentUser ? (
@@ -217,12 +217,12 @@ function Navbar() {
               <img src={currentUser.avatar || '/noavatar.jpg'} alt="User" />
             </Link>
             <span>{currentUser.username || 'User'}</span>
-            {!isChatPage && (
+           
               <Link to="/chatPage" className="profileButton">
                 {number > 0 && <div className="notification">{number}</div>}
-                <span>Chat</span>
+                <span>Chats</span>
               </Link>
-            )}
+            
           </div>
         ) : (
           <>
@@ -240,9 +240,16 @@ function Navbar() {
           />
         </div>
         <div className={open ? 'menu active' : 'menu'}>
-          {!isHomePage && <a href="/">Home</a>}
-          {!isProfilePage && currentUser && <Link to="/profile">Profile</Link>}
-          {!isChatPage && !isHomePage &&<a href="/chatPage">Chat</a>}
+        {currentUser && (
+          <>
+          <a href="/">Home</a>
+          <Link to="/profile">Profile</Link>
+          <a href="/chatPage">Chats</a>
+          </>
+        )}
+          
+          {/* {!isProfilePage && currentUser && <Link to="/profile">Profile</Link>}
+          {!isChatPage && !isHomePage &&<a href="/chatPage">Chat</a>} */}
           {!currentUser && (
             <>
               <a href="/login">Sign in</a>

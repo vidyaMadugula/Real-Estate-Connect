@@ -1,4 +1,3 @@
-
 import List from "../../components/list/List";
 import "./profilePage.scss";
 import apiRequest from "../../lib/apiRequest";
@@ -78,4 +77,5 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
 

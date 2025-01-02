@@ -30,6 +30,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 50px;
+    border: none;
 
     .logo {
       font-weight: bold;
@@ -73,19 +74,20 @@ nav {
       display: flex;
       align-items: center;
       font-weight: bold;
-      gap: 5px;
+      gap: 0px;
 
       img {
         width: 40px;
         height: 40px;
         border-radius: 50%;
         object-fit: cover;
-        margin-right: 10px;
+        
       }
 
       span {
         font-size: 16px;
         color: #333;
+        margin-left: -14px;
 
         @include sm {
           display: none; // Hide username on mobile view
@@ -93,7 +95,8 @@ nav {
       }
 
       .profileButton {
-        padding: 12px 24px;
+        padding: 12px 24px 10px 34px;
+        margin-left: 12px;
         background-color: #fece51;
         cursor: pointer;
         border: none;

@@ -6,7 +6,7 @@ import L from 'leaflet';
 import Pin from '../pin/Pin';
 
 function Map({ items }) {
-  console.log(items);  // Log the items to check data
+    // Log the items to check data
   
   // Default center if no items
   const defaultCenter = [52.4797, -1.90269];

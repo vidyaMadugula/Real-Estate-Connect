@@ -331,11 +331,11 @@ function NewPostPage() {
               <input min={0} id="size" name="size" type="number" />
             </div>
             <div className="item">
-              <label htmlFor="school">School</label>
+              <label htmlFor="school">Distance to School (Km)</label>
               <input min={0} id="school" name="school" type="number" />
             </div>
             <div className="item">
-              <label htmlFor="bus">Bus</label>
+              <label htmlFor="bus">Distance to Bus (Km)</label>
               <input min={0} id="bus" name="bus" type="number" />
             </div>
             <div className="item">
