@@ -6,7 +6,6 @@ export const getChats = async (req, res) => {
   if (!tokenUserId) {
     return res.status(401).json({status: 401, message: "User ID is not defined" });
 }
-
   try {
     const chats = await prisma.chat.findMany({
       where: {
@@ -15,7 +14,6 @@ export const getChats = async (req, res) => {
         },
       },
     });
-
     for (const chat of chats) {
       const receiverId = chat.userIDs.find((id) => id !== tokenUserId);
 
@@ -41,7 +39,6 @@ export const getChats = async (req, res) => {
 
 export const getChat = async (req, res) => {
   const tokenUserId = req.userId;
-
   try {
     const chat = await prisma.chat.findUnique({
       where: {
@@ -107,10 +104,9 @@ export const addChat = async (req, res) => {
   }
 };
 
-export const readChat = async (req, res) => {
-  const tokenUserId = req.userId;
 
-  
+export const readChat = async (req, res) => {
+  const tokenUserId = req.userId; 
   try {
     const chat = await prisma.chat.update({
       where: {

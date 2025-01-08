@@ -125,6 +125,7 @@ function Chat({ chats }) {
               </div>
             ))}
             <div ref={messageEndRef}></div>
+            <div ref={messageEndRef}></div>
           </div>
           <form onSubmit={handleSubmit} className="bottom">
             <textarea name="text"></textarea>

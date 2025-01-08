@@ -3,6 +3,7 @@
 .profilePage {
   display: flex;
   height: 100%;
+  
 
   @include md{
     flex-direction: column;
@@ -20,25 +21,32 @@
     }
 
     .wrapper{
-      padding-right: 50px;
+      padding-right: 0px;
       display: flex;
       flex-direction: column;
       gap: 50px;
+      // background-color: #fece51;
 
       .title{
         display: flex;
         align-items: center;
         justify-content: space-between;
+        
 
         h1{
           font-weight: 300;
         }
 
         button{
-          padding: 12px 24px;
+          padding: 14px 24px;
           background-color: #fece51;
           cursor: pointer;
           border: none;
+          margin-right: 10px;
+          @include sm{
+            padding: 10px 10px;
+            margin-right: 0px;
+          }
         }
       }
 

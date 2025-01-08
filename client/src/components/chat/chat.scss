@@ -1,14 +1,21 @@
+@import "../../responsive.scss";
 .chat {
   height: 100%;
   display: flex;
   flex-direction: column;
-
+  
+  // @include md{
+  //   flex-direction: column;
+  //   overflow: scroll;
+  // }
   .messages {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-y: scroll;
+    padding: 20px;
+    
+    // overflow-y: scroll;
 
     h1 {
       font-weight: 300;
@@ -22,6 +29,7 @@
       align-items: center;
       gap: 20px;
       cursor: pointer;
+      
 
       img {
         width: 40px;

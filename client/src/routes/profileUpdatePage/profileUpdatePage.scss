@@ -1,24 +1,26 @@
+@import "../../responsive.scss";
 .profileUpdatePage {
   height: 100%;
   display: flex;
+  flex-direction: column;
 
   .formContainer {
     flex:3;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
+    
     form {
       display: flex;
       flex-direction: column;
       gap: 20px;
+      
 
       .item {
         display: flex;
         flex-direction: column;
         gap: 5px;
-
-        label {
-        }
 
         input {
           padding: 20px;
@@ -27,29 +29,48 @@
         }
       }
       button {
-        padding: 20px;
+        padding: 10px;
         border-radius: 5px;
         border: none;
         background-color: teal;
         color: white;
         font-weight: bold;
         cursor: pointer;
+        width:100px;
+      }
+    }
+    .sideContainer {
+      flex: 2;
+      background-color: #fcf5f3;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding:10px;
+  
+      .avatar{
+        width: 50%;
+        object-fit: cover;
+      }
+    }
+    .btn{
+      margin-left: 35%;
+      padding: 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: teal;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      width:200px;
+        
+      @include sm{
+        margin-left: 20%;
       }
     }
   }
 
-  .sideContainer {
-    flex: 2;
-    background-color: #fcf5f3;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-
-    .avatar{
-      width: 50%;
-      object-fit: cover;
-    }
-  }
+  
+  
 }

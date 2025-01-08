@@ -2,8 +2,12 @@
 .chatPage {
     flex: 2;
     background-color: #fcf5f3;
-    height: 100%;
+    // height: 100%;
+    height: max-content;
     padding: 20px;
+    overflow: hidden;
+    
+    
 
     @include md{
       flex:none;
@@ -11,8 +15,9 @@
     }
 
     .wrapper{
-      padding: 0px 20px;
-      height: 100%;
+      padding: 0px 0px;
+      height:100%;
+      
     }
     h1{
         margin-bottom: 20px;

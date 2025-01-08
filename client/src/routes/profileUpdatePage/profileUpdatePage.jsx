@@ -61,11 +61,7 @@ function ProfileUpdatePage() {
             <label htmlFor="password">Password</label>
             <input id="password" name="password" type="password" />
           </div>
-          <button>Update</button>
-          {error && <span>error</span>}
-        </form>
-      </div>
-      <div className="sideContainer">
+          <div className="sideContainer">
         <img src={avatar[0] || currentUser.avatar || "/noavatar.jpg"} alt="" className="avatar" />
         <UploadWidget uwConfig={{
           cloudName:"dgy2fxzcs",
@@ -77,6 +73,24 @@ function ProfileUpdatePage() {
         setState={setAvatar}
           />
       </div>
+          
+          <button className="btn">Update</button>
+          {error && <span>error</span>}
+        </form>
+      </div>
+      {/* <div className="sideContainer">
+        <img src={avatar[0] || currentUser.avatar || "/noavatar.jpg"} alt="" className="avatar" />
+        <UploadWidget uwConfig={{
+          cloudName:"dgy2fxzcs",
+          uploadPreset:"estate",
+          multiple:false,
+          maxImageFileSize:2000000,
+          folder:"avatars",
+        }}
+        setState={setAvatar}
+          />
+      </div> */}
+
     </div>
   );
 }
