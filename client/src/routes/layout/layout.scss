@@ -28,11 +28,14 @@
   }
   nav {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
     top: 0;
     width:1400px;
     z-index: 1000;
     background-color: white; /* Ensure the navbar has a background to avoid overlap issues */
     height: 100px;
+    padding-right:10px;
     @include lg{
       max-width: 1216px;
     }
@@ -40,7 +43,8 @@
       max-width: 850px;
     }
     @include sm{
-      max-width: 620px;
+      max-width: 420px;
+      
     }
   }
 
