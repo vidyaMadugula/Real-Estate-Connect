@@ -12,6 +12,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  width:90%;
+  z-index: 1000;
+  background-color: white; /* Ensure the navbar has a background to avoid overlap issues */
+  height: 60px;
+ 
 
   a {
     transition: all 0.2s ease;

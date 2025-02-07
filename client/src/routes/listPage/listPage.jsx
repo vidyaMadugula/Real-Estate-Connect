@@ -1,6 +1,4 @@
 
-
-
 import "./listPage.scss";
 import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";

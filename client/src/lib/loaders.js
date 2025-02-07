@@ -14,6 +14,17 @@ export const listPageLoader = async ({ request, params }) => {
   });
 };
 
+// export const listPageLoader = async ({ request, params }) => {
+//   const url = new URL(request.url);
+//   const query = url.searchParams.toString(); // Get query parameters as a string
+
+//   const postPromise = apiRequest("/posts?" + query);
+//   return defer({
+//     postResponse: postPromise,
+//   });
+// };
+
+
 export const profilePageLoader = async () => {
   const postPromise = apiRequest("/users/profilePosts");
   // const chatPromise = apiRequest("/chats");

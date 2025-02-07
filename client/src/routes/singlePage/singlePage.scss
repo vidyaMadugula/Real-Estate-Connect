@@ -107,10 +107,14 @@
           }
         }
         .bottom {
-          margin-top: 50px;
+          margin-top: 30px;
           color: #555;
           line-height: 20px;
-          padding-bottom: 50px;
+          padding-bottom: 40px;
+          @include sm{
+            margin-top: 5px;
+            padding-bottom: 0px;
+          }
         }
       }
     }

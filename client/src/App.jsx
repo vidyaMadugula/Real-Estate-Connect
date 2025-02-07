@@ -70,6 +70,12 @@ function App() {
           element: <ChatPage />,
           loader:chatPageLoader
         },
+        {
+          path: "/chatPage/:id",
+          element: <ChatPage />,
+          loader: chatPageLoader,
+        }
+        
       ],
     },
   ]);

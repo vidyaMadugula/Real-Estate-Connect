@@ -35,6 +35,11 @@
 
         h1{
           font-weight: 300;
+          font-weight: bold;
+          @include sm{
+            font-size:22px;
+            font-weight: bold;
+          }
         }
 
         button{
