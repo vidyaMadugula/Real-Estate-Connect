@@ -28,8 +28,6 @@
   }
   nav {
     position: fixed;
-    display: flex;
-    justify-content: space-between;
     top: 0;
     width:1400px;
     z-index: 1000;
@@ -43,7 +41,7 @@
       max-width: 850px;
     }
     @include sm{
-      max-width: 420px;
+      max-width: 350px;
       
     }
   }

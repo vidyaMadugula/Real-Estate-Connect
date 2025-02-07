@@ -623,3 +623,12 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/users/profilePosts\",\"status\":\"304\",\"responseTime\":\"206.682\"}","timestamp":"2025-02-07T16:28:06.458Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/users/notification\",\"status\":\"304\",\"responseTime\":\"78.261\"}","timestamp":"2025-02-07T16:28:06.471Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/chats\",\"status\":\"304\",\"responseTime\":\"213.607\"}","timestamp":"2025-02-07T16:28:09.793Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/posts\",\"status\":\"304\",\"responseTime\":\"115.819\"}","timestamp":"2025-02-07T16:48:55.615Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/posts\",\"status\":\"304\",\"responseTime\":\"84.408\"}","timestamp":"2025-02-07T16:48:55.753Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/users/notification\",\"status\":\"304\",\"responseTime\":\"132.602\"}","timestamp":"2025-02-07T16:48:55.801Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/users/notification\",\"status\":\"304\",\"responseTime\":\"68.830\"}","timestamp":"2025-02-07T16:48:55.901Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/posts\",\"status\":\"304\",\"responseTime\":\"94.843\"}","timestamp":"2025-02-07T16:48:55.911Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/posts\",\"status\":\"304\",\"responseTime\":\"97.931\"}","timestamp":"2025-02-07T16:48:59.659Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/posts\",\"status\":\"304\",\"responseTime\":\"88.146\"}","timestamp":"2025-02-07T16:48:59.759Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/users/notification\",\"status\":\"304\",\"responseTime\":\"80.331\"}","timestamp":"2025-02-07T16:48:59.915Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/users/notification\",\"status\":\"304\",\"responseTime\":\"88.348\"}","timestamp":"2025-02-07T16:49:00.010Z"}
