@@ -7,10 +7,10 @@ dotenv.config();
 
 const io = new Server(4000, {
   cors: {
-    origin: process.env.VITE_CLIENT_URL, // Ensure this matches your deployed client URL
+    origin: process.env.VITE_CLIENT_URL , // Ensure this matches your deployed client URL
     // origin: [process.env.VITE_CLIENT_URL,
-    //   'http://localhost:5173',
-    // ], 
+    //     'http://localhost:5173',
+    //   ], 
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -56,3 +56,4 @@ io.on("connection", (socket) => {
 });
 
 console.log("WebSocket server listening on port 4000");
+
