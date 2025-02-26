@@ -512,8 +512,7 @@ const SinglePage = () => {
   // const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const isMobile = window.matchMedia("(max-width: 600px)").matches;
   console.log(isMobile);
-  const upiLink = "upi://pay?pa=9@axl&pn=RealEstateConnect&mc=1234&tid=123456&tr=order123&tn=Property%20Payment&am=2&cu=INR";
-
+  const upiLink = import.meta.env.VITE_UPI_ID;
   const handleGetOwnerDetails = async () => {
     if (!post.id) {
       console.error("Post ID is missing");
@@ -679,8 +678,7 @@ const SinglePage = () => {
                           //   alt="Scan QR to Pay"
                           // />
                           <img className="image"
-  // src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`}
-  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=HelloWorld`}
+  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`}
   alt="Scan QR to Pay"
   style={{ width: "80px", height: "80px", objectFit: "contain" }}
 />
