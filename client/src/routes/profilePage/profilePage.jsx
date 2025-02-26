@@ -15,6 +15,8 @@ function ProfilePage() {
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
+      localStorage.removeItem("user");
+      localStorage.removeItem("savedPosts");
       updateUser(null);
       navigate("/");
     } catch (err) {

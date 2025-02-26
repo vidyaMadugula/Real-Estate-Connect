@@ -11,7 +11,9 @@ import messageRoute from "./routes/message.route.js";
 import logger from "./logger.js";
 import morgan from "morgan";
 
+
 const app = express();
+app.use(cookieParser());
 
 // Enhanced CORS configuration
 app.use(
@@ -28,7 +30,7 @@ app.use(
 );
 
 app.use(express.json());
-app.use(cookieParser());
+
 const morganFormat = ":method :url :status :response-time ms";
 
 
