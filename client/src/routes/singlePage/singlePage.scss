@@ -215,7 +215,25 @@
       .buttons {
         display: flex;
         justify-content: space-between;
-        padding-bottom: 50px;
+        padding-bottom: 10px;
+        @include sm{
+          flex-direction: column;
+        }
+        .btn-1{
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          width: 200px;
+          gap: 5px;
+          background-color: white;
+          border: 1px solid #fece51;
+          border-radius: 5px;
+          cursor: pointer;
+          @include sm{
+            width: 100%;
+          }
+
+        }
 
         button {
           padding: 20px;
@@ -231,8 +249,95 @@
             width: 16px;
             height: 16px;
           }
+        
         }
       }
     }
   }
+}
+
+
+
+/* Full-screen overlay that hides content behind it */
+.subscription {
+  position: fixed; /* Ensures it stays over all content */
+  top: 0px;
+  left:0px;
+  width: 100vw;
+  height: 100vh;
+  // background-color: rgba(0, 0, 0, 0.5); /* Dark overlay to emphasize modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures it appears above everything */
+  @include sm{
+    width: 100vw;
+    height: 100vh;
+    
+  }
+}
+
+/* Centered subscription alert box */
+.subscription-alert {
+  position: relative;
+  background-color: white;
+  padding: 90px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  width: 450px;
+  z-index: 10000; /* Ensures it stays above overlay */
+  @include sm{
+    padding: 90px 30px 90px 30px;
+  }
+}
+
+/* Subscription message text */
+.subscription-alert p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  width:100%;
+  @include sm{
+    font-size: 12px;
+  }
+}
+
+/* Subscribe button positioned at bottom right */
+.subscription-alert button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #2563eb;
+  // color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.subscription-alert button:hover {
+  background-color: #1e40af;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  height: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s;
+  
+}
+
+.close-btn:hover {
+  color: red;
+}
+.image{
+  margin-top: 10px;
 }

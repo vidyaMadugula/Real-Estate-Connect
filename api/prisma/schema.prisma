@@ -79,11 +79,15 @@ model User {
   password String
   salt String?
   avatar String?
+  phone String? // Added phone number field
+  contactRequests Int @default(0) // Track requests for contact details
+  subscriptionActive Boolean @default(false) // Subscription status
   createAt DateTime @default(now())
   posts Post[]
   savedPosts SavedPost[]
   chats Chat[] @relation(fields: [chatIDs],references: [id])
   chatIDs String[] @db.ObjectId
+
 }
 
 model Chat {
