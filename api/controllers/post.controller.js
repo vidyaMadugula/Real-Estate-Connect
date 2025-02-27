@@ -138,6 +138,7 @@ export const deletePost = async (req, res) => {
 
 
 
+
 // export const getOwnerDetails = async (req, res) => {
 //   const { postId } = req.params;
 //   const userId = req.userId; // Authenticated user
@@ -159,8 +160,17 @@ export const deletePost = async (req, res) => {
 //       where: { id: userId },
 //     });
 
-//     if (currentUser.contactRequests >= 10) {
-//       return res.status(403).json({ message: "Contact limit reached. Subscribe to continue." });
+//     if (currentUser.subscriptionActive) {
+//       // If the user is subscribed, grant unlimited access
+//       return res.json({
+//         ownerName: owner.username,
+//         phone: owner.phone || "Not available",
+//         address: post.address,
+//       });
+//     }
+
+//     if (currentUser.contactRequests >= 5) {
+//       return res.status(403).json({ message: "You have reached your free limit. Subscribe to continue." });
 //     }
 
 //     // Increment contact request count
@@ -180,10 +190,12 @@ export const deletePost = async (req, res) => {
 //   }
 // };
 
-
 export const getOwnerDetails = async (req, res) => {
   const { postId } = req.params;
   const userId = req.userId; // Authenticated user
+
+  console.log("Fetching owner details for postId:", postId);
+  console.log("Authenticated userId:", userId);
 
   try {
     const post = await prisma.post.findUnique({
@@ -191,19 +203,30 @@ export const getOwnerDetails = async (req, res) => {
       include: { user: true },
     });
 
+    console.log("Post found:", post);
+
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
 
+    if (!post.user) {
+      console.error("User details missing for post:", postId);
+      return res.status(500).json({ message: "Post owner details not found" });
+    }
+
     const owner = post.user;
 
-    // Check contact request limit
     const currentUser = await prisma.user.findUnique({
       where: { id: userId },
     });
 
+    console.log("Current user details:", currentUser);
+
+    if (!currentUser) {
+      return res.status(403).json({ message: "User not found or unauthorized" });
+    }
+
     if (currentUser.subscriptionActive) {
-      // If the user is subscribed, grant unlimited access
       return res.json({
         ownerName: owner.username,
         phone: owner.phone || "Not available",
@@ -215,7 +238,6 @@ export const getOwnerDetails = async (req, res) => {
       return res.status(403).json({ message: "You have reached your free limit. Subscribe to continue." });
     }
 
-    // Increment contact request count
     await prisma.user.update({
       where: { id: userId },
       data: { contactRequests: currentUser.contactRequests + 1 },
@@ -227,10 +249,11 @@ export const getOwnerDetails = async (req, res) => {
       address: post.address,
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching owner details:", error);
     res.status(500).json({ message: "Error fetching owner details" });
   }
 };
+
 
 
 export const subscribeUser = async (req, res) => {
