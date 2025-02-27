@@ -8,13 +8,14 @@ import axios from "axios";
 //   withCredentials: true,
 //   timeout: 10000,
 // });
-const token = localStorage.getItem("token"); 
+
 const apiRequest = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   // baseURL: "http://localhost:8800/api",
   withCredentials: true,
-  headers: { Authorization: `Bearer ${token}` }
+  timeout: 10000,
 });
+
 
 export default apiRequest;
 

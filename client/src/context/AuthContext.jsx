@@ -1,10 +1,33 @@
+// import { createContext, useEffect, useState } from "react";
+
+// export const AuthContext = createContext();
+
+// export const AuthContextProvider = ({ children }) => {
+//   const [currentUser, setCurrentUser] = useState(
+//     JSON.parse(localStorage.getItem("user")) || null
+//   );
+
+//   const updateUser = (data) => {
+//     setCurrentUser(data);
+//   };
+
+//   useEffect(() => {
+//     localStorage.setItem("user", JSON.stringify(currentUser));
+//   }, [currentUser]);
+
+//   return (
+//     <AuthContext.Provider value={{ currentUser,updateUser }}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
+    () => JSON.parse(localStorage.getItem("user")) || null
   );
 
   const updateUser = (data) => {
@@ -12,11 +35,15 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
+    if (currentUser) {
+      localStorage.setItem("user", JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem("user");
+    }
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser,updateUser }}>
+    <AuthContext.Provider value={{ currentUser, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
