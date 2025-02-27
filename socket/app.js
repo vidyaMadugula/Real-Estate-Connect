@@ -7,10 +7,10 @@ dotenv.config();
 
 const io = new Server(4000, {
   cors: {
-    // origin: process.env.VITE_CLIENT_URL , // Ensure this matches your deployed client URL
-    origin: [process.env.VITE_CLIENT_URL,
-        'http://localhost:5173',
-      ], 
+    origin: process.env.VITE_CLIENT_URL , // Ensure this matches your deployed client URL
+    // origin: [process.env.VITE_CLIENT_URL,
+    //     'http://localhost:5173',
+    //   ], 
     methods: ["GET", "POST"],
     credentials: true,
   },
