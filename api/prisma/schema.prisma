@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,98 +7,68 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
-model Post {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  title String 
-  price Int 
-  images String[]
-  address String
-  city String
-  bedroom Int
-  bathroom Int
-  latitude String
-  longitude String
-  type Type
-  property Property
-  createAt DateTime @default(now())
-  user User @relation(fields: [userId],references: [id])
-  userId String @db.ObjectId
-  postDetail PostDetail?
-  savedPosts SavedPost[]
-}
-
-
-enum Type {
-  buy
-  rent
-}
-
-enum Property {
-  appartment
-  house
-  condo
-  land
-}
-
-model PostDetail {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  desc String
-  utilities String?
-  pet String?
-  income String?
-  size Int?
-  school Int?
-  bus Int?
-  restaurant Int?
-  post Post @relation(fields: [postId], references: [id])
-  postId String @db.ObjectId @unique
-}
-
-model SavedPost {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  user User @relation(fields:[userId], references: [id])
-  post Post @relation(fields:[postId], references: [id])
-  userId String @db.ObjectId 
-  postId String @db.ObjectId 
-  createAt DateTime @default(now())
-
-  @@unique([userId,postId])
-}
-model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  email String @unique
-  username String @unique
-  password String
-  salt String?
-  avatar String?
-  phone String? // Added phone number field
-  contactRequests Int @default(0) // Track requests for contact details
-  subscriptionActive Boolean @default(false) // Subscription status
-  createAt DateTime @default(now())
-  posts Post[]
-  savedPosts SavedPost[]
-  chats Chat[] @relation(fields: [chatIDs],references: [id])
-  chatIDs String[] @db.ObjectId
-
-}
-
 model Chat {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  users User[] @relation(fields: [userIDs],references: [id])
-  userIDs String[] @db.ObjectId
-  createAt DateTime @default(now())
-  seenBy String[] @db.ObjectId
-  messages Message[]
-  lastMessage String?
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createAt    DateTime @db.Date
+  lastMessage String
+  seenBy      String[]
+  userIDs     String[]
 }
 
 model Message {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  text String
-  userId String
-  chat Chat @relation(fields: [chatId],references: [id])
-  chatId String @db.ObjectId
-  createAt DateTime @default(now())
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  chatId   String   @db.ObjectId
+  createAt DateTime @db.Date
+  text     String
+  userId   String
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  address   String
+  bathroom  BigInt
+  bedroom   BigInt
+  city      String
+  createAt  DateTime @db.Date
+  images    String[]
+  latitude  String
+  longitude String
+  price     BigInt
+  property  String
+  title     String
+  type      String
+  userId    String   @db.ObjectId
+}
+
+model PostDetail {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  bus        BigInt
+  desc       String
+  income     String
+  pet        String?
+  postId     String  @unique @db.ObjectId
+  restaurant BigInt
+  school     BigInt
+  size       BigInt
+  utilities  String?
+}
+
+model SavedPost {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @db.Date
+  postId   String   @db.ObjectId
+  userId   String   @db.ObjectId
+
+  @@unique([userId, postId])
+}
+
+model User {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  avatar          String?
+  contactRequests BigInt?
+  createAt        DateTime @db.Date
+  email           String   @unique
+  password        String
+  salt            String?
+  username        String   @unique
 }
