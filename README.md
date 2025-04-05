@@ -36,7 +36,7 @@ api
 ├── logger.js            
 ├── package.json         
 └── package-lock.json
-client                    # React frontend
+client                   
 ├── README.md
 ├── .gitignore
 ├── vercel.json
