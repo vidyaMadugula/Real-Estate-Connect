@@ -100,6 +100,39 @@ import jwt from "jsonwebtoken";
 import prisma from "../lib/prisma.js";
 import logger from "../logger.js";
 
+// export const register = async (req, res) => {
+//   const { username, email, password } = req.body;
+
+//   try {
+//     // GENERATE A SALT
+//     const salt = await bcrypt.genSalt(10);
+
+//     // HASH THE PASSWORD WITH THE SALT
+//     const hashedPassword = await bcrypt.hash(password + salt, 10);
+
+//     console.log("Salt:", salt);
+//     console.log("Hashed Password:", hashedPassword);
+
+//     // CREATE A NEW USER AND SAVE TO DB (INCLUDE THE SALT)
+//     const newUser = await prisma.user.create({
+//       data: {
+//         username,
+//         email,
+//         password: hashedPassword,
+//         salt, // Store the salt in the database
+//       },
+//     });
+
+//     console.log(newUser);
+
+//     res.status(201).json({ status: 201, message: "User created successfully" });
+//     logger.info(`${username} registered successfully`);
+//   } catch (err) {
+//     res.status(500).json({ status: 500, message: "Failed to create user!" });
+//   }
+// };
+
+
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -113,13 +146,14 @@ export const register = async (req, res) => {
     console.log("Salt:", salt);
     console.log("Hashed Password:", hashedPassword);
 
-    // CREATE A NEW USER AND SAVE TO DB (INCLUDE THE SALT)
+    // CREATE A NEW USER AND SAVE TO DB (INCLUDE THE SALT AND CURRENT DATE FOR createAt)
     const newUser = await prisma.user.create({
       data: {
         username,
         email,
         password: hashedPassword,
         salt, // Store the salt in the database
+        createAt: new Date(), // Set createAt to the current date and time
       },
     });
 
@@ -128,9 +162,13 @@ export const register = async (req, res) => {
     res.status(201).json({ status: 201, message: "User created successfully" });
     logger.info(`${username} registered successfully`);
   } catch (err) {
+    console.error("Registration Error:", err); // Log the error here for more details
+    logger.error(`Failed to register user: ${err.message}`); // Log the error with the error message
+
     res.status(500).json({ status: 500, message: "Failed to create user!" });
   }
 };
+
 
 
 export const login = async (req, res) => {
@@ -171,7 +209,16 @@ export const login = async (req, res) => {
       { expiresIn: age }
     );
 
+    
+    // Convert BigInt values to string before sending the response
     const { password: userPassword, salt: userSalt, ...userInfo } = user;
+
+    // Convert any BigInt fields in userInfo to string
+    const userInfoStringified = JSON.parse(
+      JSON.stringify(userInfo, (key, value) =>
+        typeof value === 'bigint' ? value.toString() : value
+      )
+    );
 
     res
       .cookie("token", token, {
@@ -181,7 +228,7 @@ export const login = async (req, res) => {
         maxAge: age,
       })
       .status(200)
-      .json(userInfo);
+      .json(userInfoStringified);
 
     logger.info(`${username} logged in successfully`);
   } catch (err) {

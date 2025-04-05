@@ -19,17 +19,35 @@ function Chat({ chats }) {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat]);
 
+  // const handleOpenChat = async (id, receiver) => {
+  //   try {
+  //     const res = await apiRequest("/chats/" + id);
+  //     if (!res.data.seenBy.includes(currentUser.id)) {
+  //       decrease();
+  //     }
+  //     setChat({ ...res.data, receiver });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const handleOpenChat = async (id, receiver) => {
     try {
       const res = await apiRequest("/chats/" + id);
       if (!res.data.seenBy.includes(currentUser.id)) {
         decrease();
       }
-      setChat({ ...res.data, receiver });
+  
+      // Ensure receiver exists before setting chat state
+      if (receiver) {
+        setChat({ ...res.data, receiver });
+      } else {
+        console.error("Receiver data is missing", res.data);
+      }
     } catch (err) {
       console.log(err);
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,8 +107,8 @@ function Chat({ chats }) {
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
           >
-            <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
-            <span>{c.receiver.username}</span>
+            <img src={c?.receiver?.avatar || "/noavatar.jpg"} alt="" />
+            <span>{c?.receiver?.username}</span>
             <p>{c.lastMessage}</p>
           </div>
         ))}
@@ -99,8 +117,8 @@ function Chat({ chats }) {
         <div className="chatBox">
           <div className="top">
             <div className="user">
-              <img src={chat.receiver.avatar || "noavatar.jpg"} alt="" />
-              {chat.receiver.username}
+              <img src={chat?.receiver?.avatar || "noavatar.jpg"} alt="" />
+              {chat?.receiver?.username}
             </div>
             <span className="close" onClick={() => setChat(null)}>
               X

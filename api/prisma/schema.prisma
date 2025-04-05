@@ -13,6 +13,7 @@ model Chat {
   lastMessage String
   seenBy      String[]
   userIDs     String[]
+  messages    Message[] @relation("ChatMessages") // Added relation
 }
 
 model Message {
@@ -21,8 +22,57 @@ model Message {
   createAt DateTime @db.Date
   text     String
   userId   String
+  chat     Chat     @relation("ChatMessages", fields: [chatId], references: [id]) // Added relation to Chat
 }
 
+// model Chat {
+//   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+//   createAt    DateTime @db.Date
+//   lastMessage String
+//   seenBy      String[]
+//   userIDs     String[]
+// }
+
+// model Message {
+//   id       String   @id @default(auto()) @map("_id") @db.ObjectId
+//   chatId   String   @db.ObjectId
+//   createAt DateTime @db.Date
+//   text     String
+//   userId   String
+// }
+
+
+// model Post {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   address   String
+//   bathroom  BigInt
+//   bedroom   BigInt
+//   city      String
+//   createAt  DateTime @db.Date
+//   images    String[]
+//   latitude  String
+//   longitude String
+//   price     BigInt
+//   property  String
+//   title     String
+//   type      String
+//   userId    String   @db.ObjectId
+//   savedBy   SavedPost[] 
+// }
+
+// model PostDetail {
+//   id         String  @id @default(auto()) @map("_id") @db.ObjectId
+//   bus        BigInt
+//   desc       String
+//   income     String
+//   pet        String?
+//   postId     String  @unique @db.ObjectId
+//   restaurant BigInt
+//   school     BigInt
+//   size       BigInt
+//   utilities  String?
+
+// }
 model Post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   address   String
@@ -38,6 +88,9 @@ model Post {
   title     String
   type      String
   userId    String   @db.ObjectId
+  user        User       @relation(fields: [userId], references: [id])
+  savedBy   SavedPost[] 
+  postDetail PostDetail? @relation("PostDetailToPost") // Ensure this line is present and correctly referenced
 }
 
 model PostDetail {
@@ -51,16 +104,31 @@ model PostDetail {
   school     BigInt
   size       BigInt
   utilities  String?
+  post       Post     @relation("PostDetailToPost", fields: [postId], references: [id]) // Check the relation setup
 }
 
+
+// model SavedPost {
+//   id       String   @id @default(auto()) @map("_id") @db.ObjectId
+//   createAt DateTime @db.Date
+//   postId   String   @db.ObjectId
+//   userId   String   @db.ObjectId
+
+//   @@unique([userId, postId])
+// }
 model SavedPost {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   createAt DateTime @db.Date
-  postId   String   @db.ObjectId
+  postId   String?  @db.ObjectId
   userId   String   @db.ObjectId
+
+  post     Post?    @relation(fields: [postId], references: [id], onDelete: SetNull) // ✅ Define relation with Post
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade) // ✅ Define relation with User
 
   @@unique([userId, postId])
 }
+
+
 
 model User {
   id              String   @id @default(auto()) @map("_id") @db.ObjectId
@@ -71,4 +139,6 @@ model User {
   password        String
   salt            String?
   username        String   @unique
+  savedPosts SavedPost[]
+  posts           Post[]   
 }

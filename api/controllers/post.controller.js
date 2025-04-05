@@ -1,6 +1,76 @@
 import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
+// export const getPosts = async (req, res) => {
+//   const { page = 1, limit = 10, city, type, property, bedroom, minPrice, maxPrice } = req.query;
+
+//   const pageNumber = parseInt(page);
+//   const limitNumber = parseInt(limit);
+
+//   try {
+//     // const posts = await prisma.post.findMany({
+//     //   where: {
+//     //     city: city || undefined,
+//     //     type: type || undefined,
+//     //     property: property || undefined,
+//     //     bedroom: parseInt(bedroom) || undefined,
+//     //     price: {
+//     //       gte: parseInt(minPrice) || undefined,
+//     //       lte: parseInt(maxPrice) || undefined,
+//     //     },
+//     //   },
+//     //   skip: (pageNumber - 1) * limitNumber,
+//     //   take: limitNumber,
+//     // });
+//     const posts = await prisma.post.findMany({
+//       where: {
+//         city: city || undefined,
+//         type: type || undefined,
+//         property: property || undefined,
+//         bedroom: parseInt(bedroom) || undefined,
+//         price: {
+//           gte: parseInt(minPrice) || undefined,
+//           lte: parseInt(maxPrice) || undefined,
+//         },
+//       },
+//       skip: (pageNumber - 1) * limitNumber,
+//       take: limitNumber,
+//     });
+    
+//     if (!posts || posts.length === 0) {
+//       console.log("No posts found with the current filters.");
+//     }
+    
+
+//     res.status(200).json(posts);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({ status: 500, message: "Failed to get posts" });
+//   }
+// };
+// Utility function to handle BigInt conversion recursively
+
+function convertBigIntToString(obj) {
+  if (typeof obj === 'bigint') {
+    return obj.toString(); // Convert BigInt to string
+  }
+  
+  if (Array.isArray(obj)) {
+    return obj.map(item => convertBigIntToString(item)); // Handle arrays
+  }
+
+  if (obj !== null && typeof obj === 'object') {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        obj[key] = convertBigIntToString(obj[key]); // Recursively process the object
+      }
+    }
+  }
+
+  return obj;
+}
+
+
 export const getPosts = async (req, res) => {
   const { page = 1, limit = 10, city, type, property, bedroom, minPrice, maxPrice } = req.query;
 
@@ -23,7 +93,10 @@ export const getPosts = async (req, res) => {
       take: limitNumber,
     });
 
-    res.status(200).json(posts);
+    // Convert any BigInt fields to strings before sending the response
+    const postsWithStringifiedBigInt = posts.map(post => convertBigIntToString(post));
+
+    res.status(200).json(postsWithStringifiedBigInt);
   } catch (err) {
     console.log(err);
     res.status(500).json({ status: 500, message: "Failed to get posts" });
@@ -47,6 +120,7 @@ export const getPost = async (req, res) => {
               avatar: true,
             },
           },
+          savedBy: true,
         },
       });
   
@@ -64,13 +138,17 @@ export const getPost = async (req, res) => {
               },
             });
             // Send response here if token is valid
-            return res.status(200).json({ ...post, isSaved: saved ? true : false });
+            // return res.status(200).json({ ...post, isSaved: saved ? true : false });
+          const postWithStringifiedBigInt = convertBigIntToString(post);
+          return res.status(200).json({ ...postWithStringifiedBigInt, isSaved: saved ? true : false });
           }
           // If token verification failed, you can log or handle it accordingly
         });
       } else {
         // If no token is present, send this response
-        res.status(200).json({ ...post, isSaved: false });
+        // res.status(200).json({ ...post, isSaved: false });
+      const postWithStringifiedBigInt = convertBigIntToString(post);
+      res.status(200).json({ ...postWithStringifiedBigInt, isSaved: false });
       }
     } catch (err) {
       console.log(err);
@@ -137,58 +215,6 @@ export const deletePost = async (req, res) => {
 };
 
 
-
-
-// export const getOwnerDetails = async (req, res) => {
-//   const { postId } = req.params;
-//   const userId = req.userId; // Authenticated user
-
-//   try {
-//     const post = await prisma.post.findUnique({
-//       where: { id: postId },
-//       include: { user: true },
-//     });
-
-//     if (!post) {
-//       return res.status(404).json({ message: "Post not found" });
-//     }
-
-//     const owner = post.user;
-
-//     // Check contact request limit
-//     const currentUser = await prisma.user.findUnique({
-//       where: { id: userId },
-//     });
-
-//     if (currentUser.subscriptionActive) {
-//       // If the user is subscribed, grant unlimited access
-//       return res.json({
-//         ownerName: owner.username,
-//         phone: owner.phone || "Not available",
-//         address: post.address,
-//       });
-//     }
-
-//     if (currentUser.contactRequests >= 5) {
-//       return res.status(403).json({ message: "You have reached your free limit. Subscribe to continue." });
-//     }
-
-//     // Increment contact request count
-//     await prisma.user.update({
-//       where: { id: userId },
-//       data: { contactRequests: currentUser.contactRequests + 1 },
-//     });
-
-//     return res.json({
-//       ownerName: owner.username,
-//       phone: owner.phone || "Not available",
-//       address: post.address,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Error fetching owner details" });
-//   }
-// };
 
 export const getOwnerDetails = async (req, res) => {
   const { postId } = req.params;
