@@ -15,7 +15,12 @@ export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(io(SOCKET_URL, { withCredentials: true }));
+    // setSocket(io(SOCKET_URL, { withCredentials: true }));
+    setSocket(io(SOCKET_URL, {
+      withCredentials: true,
+      transports: ["websocket"], // Force WebSocket only
+    }));
+    
   }, []);
 
   useEffect(() => {

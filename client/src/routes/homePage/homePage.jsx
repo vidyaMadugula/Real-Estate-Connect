@@ -17,7 +17,7 @@ function HomePage() {
       const matchesPrice =
         post.price >= filters.minPrice && post.price <= filters.maxPrice;
       const matchesCity =
-        filters.cities.length === 0 || filters.cities.includes(post.address);
+        filters.cities.length === 0 || filters.cities.includes(post.city );
       const matchesBedroom =
         filters.bedrooms.length === 0 ||
         filters.bedrooms.includes(`${post.bedroom || "0"}bhk`);
@@ -27,6 +27,53 @@ function HomePage() {
     setShowFilter(false); // Hide filter after applying
   };
 
+  // const handleFilter = (filters,allPosts) => {
+  //   console.log("Filtering triggered");
+  //   console.log("Filters:", filters);
+  //   console.log("All Posts:", allPosts);
+  
+  //   const result = allPosts.filter((post) => {
+  //     const price = post.price ?? 0;
+  //     const cityName = (post.city ?? post.address ?? "").toLowerCase();
+  //     const beds = String(post.bedroom ?? post.bedrooms ?? 0);
+  //     const type = post.type ?? "";
+  
+  //     const inPriceRange =
+  //       price >= filters.minPrice && price <= filters.maxPrice;
+  
+  //     const matchesCity =
+  //       filters.cities.length === 0 ||
+  //       filters.cities.some((c) => cityName.includes(c.toLowerCase()));
+  
+  //     const matchesBedroom =
+  //       filters.bedrooms.length === 0 ||
+  //       filters.bedrooms.includes(`${beds}bhk`);
+  
+  //     const matchesType =
+  //       !filters.type || filters.type.toLowerCase() === type.toLowerCase();
+  
+  //     const isMatch = inPriceRange && matchesCity && matchesBedroom && matchesType;
+  
+  //     console.log({
+  //       price,
+  //       cityName,
+  //       beds,
+  //       type,
+  //       inPriceRange,
+  //       matchesCity,
+  //       matchesBedroom,
+  //       matchesType,
+  //       isMatch,
+  //     });
+  
+  //     return isMatch;
+  //   });
+  
+  //   setFilteredPosts(result);
+  //   setShowFilter(false);
+  // };
+  
+  
   const renderContent = (postResponse) => {
     const allPosts = postResponse?.data || [];
     const allPostsToDisplay = filteredPosts !== null ? filteredPosts : allPosts;
@@ -80,7 +127,7 @@ function HomePage() {
           <div className="textContainer">
             <div className="wrapper">
               <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
-              <SearchBar />
+              <SearchBar/>
               <div className="boxes"></div>
             </div>
           </div>

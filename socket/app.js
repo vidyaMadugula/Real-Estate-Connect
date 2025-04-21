@@ -5,16 +5,36 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const allowedOrigins = [process.env.VITE_CLIENT_URL, 'http://localhost:5173'];
+
 const io = new Server(4000, {
   cors: {
-    origin: process.env.VITE_CLIENT_URL , // Ensure this matches your deployed client URL
-    // origin: [process.env.VITE_CLIENT_URL,
-    //     'http://localhost:5173',
-    //   ], 
+    origin: (origin, callback) => {
+      console.log("Socket origin:", origin); // 👈 log origin for debugging
+
+      // Allow undefined origin for non-browser clients (like mobile apps or curl)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
+
+
+// const io = new Server(4000, {
+//   cors: {
+//     // origin: process.env.VITE_CLIENT_URL , // Ensure this matches your deployed client URL
+//     origin: [process.env.VITE_CLIENT_URL,
+//         'http://localhost:5173',
+//       ], 
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   },
+// });
 
 let onlineUser = [];
 

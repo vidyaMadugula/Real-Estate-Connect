@@ -13,21 +13,54 @@ import morgan from "morgan";
 
 
 const app = express();
+// Add this at the very top, right after `const app = express();`
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    console.log("🔎 Response Headers:", res.getHeaders());
+  });
+  next();
+});
+
 app.use(cookieParser());
 
 // Enhanced CORS configuration
-app.use(
-  cors({
-   origin: 'https://real-estate-connect-client.onrender.com', // Your frontend URL
-  //  origin:[
-  // 'http://localhost:5173',
-  // 'https://real-estate-connect-client.onrender.com'
-  // ],
-    credentials: true, // Allow credentials (cookies)
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Explicitly allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers if needed
-  })
-);
+// app.use(
+//   cors({
+//   //  origin: 'https://real-estate-connect-client.onrender.com', // Your frontend URL
+//    origin:[
+//   'http://localhost:5173',
+//   'https://real-estate-connect-client.onrender.com'
+//   ],
+//     credentials: true, // Allow credentials (cookies)
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Explicitly allowed HTTP methods
+//     allowedHeaders: ['Content-Type', 'Authorization'], // Allow custom headers if needed
+//   })
+// );
+
+
+
+
+// Allowed origins
+const allowedOrigins = [
+  "http://localhost:5173",process.env.VITE_CLIENT_URL,];
+
+// Cors options
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+
+
 
 app.use(express.json());
 
