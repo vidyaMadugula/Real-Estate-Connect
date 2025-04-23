@@ -276,6 +276,7 @@ export const savePost = async (req, res) => {
           data: {
             userId: tokenUserId,
             postId,
+            createAt: new Date(),
           },
         });
         res.status(200).json({ message: "Post saved" });
