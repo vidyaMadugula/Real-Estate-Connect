@@ -118,7 +118,7 @@ model PostDetail {
 // }
 model SavedPost {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  createAt DateTime @db.Date
+  createAt DateTime @default(now())
   postId   String?  @db.ObjectId
   userId   String   @db.ObjectId
 
