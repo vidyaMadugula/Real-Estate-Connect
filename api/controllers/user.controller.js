@@ -197,7 +197,7 @@ export const updateUser = async (req, res) => {
   const { password, avatar, ...inputs } = req.body;
 
   if (id !== tokenUserId) {
-    return res.status(403).json({status: 403, message: "Not Authorized!" });
+    return res.status(403).json({status: 403, message: "Not Authorized! for updating user" });
   }
 
   let updatedPassword = null;
@@ -229,7 +229,7 @@ export const deleteUser = async (req, res) => {
   const tokenUserId = req.userId;
 
   if (id !== tokenUserId) {
-    return res.status(403).json({status: 403, message: "Not Authorized!" });
+    return res.status(403).json({status: 403, message: "Not Authorized! for deleting user" });
   }
 
   try {

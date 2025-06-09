@@ -22,7 +22,7 @@ const dailyRotateFileTransport = new transports.DailyRotateFile({
 
 // Create a Winston logger
 const logger = createLogger({
-  level: "info",
+  level: "debug",
   format: combine(colorize(), timestamp(), json()),
   transports: [
     new transports.Console({

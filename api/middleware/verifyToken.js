@@ -23,7 +23,7 @@ export const verifyToken = (req, res, next) => {
 
   if (!token) {
     console.warn("Unauthorized access attempt: No token provided");
-    return res.status(401).json({ message: "Not authorized!" });
+    return res.status(401).json({ message: "Not authorized! for verifying token" });
   }
 
   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, payload) => {

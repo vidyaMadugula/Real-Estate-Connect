@@ -200,7 +200,7 @@ export const deletePost = async (req, res) => {
     });
 
     if (post.userId !== tokenUserId) {
-      return res.status(403).json({status: 403, message: "Not Authorized!" });
+      return res.status(403).json({status: 403, message: "Not Authorized! for Deleting Post" });
     }
 
     await prisma.post.delete({
@@ -229,7 +229,7 @@ export const getOwnerDetails = async (req, res) => {
       include: { user: true },
     });
 
-    console.log("Post found:", post);
+    console.log("Post found..:", post);
 
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
@@ -249,7 +249,7 @@ export const getOwnerDetails = async (req, res) => {
     console.log("Current user details:", currentUser);
 
     if (!currentUser) {
-      return res.status(403).json({ message: "User not found or unauthorized" });
+      return res.status(403).json({ message: "User not found" });
     }
 
     if (currentUser.subscriptionActive) {
@@ -264,10 +264,12 @@ export const getOwnerDetails = async (req, res) => {
       return res.status(403).json({ message: "You have reached your free limit. Subscribe to continue." });
     }
 
+    console.log("")
     await prisma.user.update({
       where: { id: userId },
-      data: { contactRequests: currentUser.contactRequests + 1 },
+      data: { contactRequests: currentUser.contactRequests + BigInt(1) },
     });
+
 
     return res.json({
       ownerName: owner.username,

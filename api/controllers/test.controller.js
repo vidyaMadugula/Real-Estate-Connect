@@ -13,7 +13,7 @@ export const shouldBeAdmin=async(req,res)=>{
     jwt.verify(token,process.env.JWT_SECRET_KEY,async(err,payload)=>{
         if(err) return res.status(403).json({status: 403,message:"Token is not valid!"})
         if(!payload.isAdmin){
-            return res.status(403).json({status: 403,message:"Not Authorized"})
+            return res.status(403).json({status: 403,message:"Not Authorized for should be admin"})
         }
     })
 
